@@ -1,9 +1,19 @@
 package main
 
 import (
-	"fmt"
+	_ "Honeycomb/mysqlUtility"
+	"Honeycomb/router"
+	"log"
+	"net/http"
 )
 
 func main() {
-	fmt.Printf("Hello, world.\n")
+	router.LoadBaseRouter()
+	router.LoadUserRouter()
+
+	err := http.ListenAndServe(":8080", nil)
+	if err != nil {
+		log.Fatal("ListenAndServer: ", err)
+	}
+
 }
