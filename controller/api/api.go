@@ -15,6 +15,10 @@ func checkAPIKey(key string) bool {
 
 }
 
+func defaultCmd(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "")
+}
+
 func Hub(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	k := strings.Join(r.Form["api-key"], "")
@@ -24,9 +28,14 @@ func Hub(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println(r.Form)
+	cmd := strings.Join(r.Form["command"], "")
 
-	fmt.Fprintf(w, "Hello world.")
-
-	Projects(w, r)
+	switch cmd {
+	case "addProject":
+		AddProject(w, r)
+	case "projects":
+		Projects(w, r)
+	default:
+		defaultCmd(w, r)
+	}
 }
