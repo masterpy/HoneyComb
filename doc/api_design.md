@@ -40,3 +40,32 @@ command : "command name"     api命令，根据command将分发到不同的处�
     "result": {}             //不同的接口不同的结果
 }
 
+添加mission
+{
+    "command" : "addMission",
+    "mission_name" : "",
+    "mission_detial" : ""
+}
+
+{
+    "error": {
+        "errorCode" : 0,
+        "errorMessage": ""
+    },
+    "command": "addMission",
+    "UserCode": string,      //发起该操作的user
+    "result": {}             //不同的接口不同的结果
+}
+
+修改mission
+
+获取所有mission
+
+删除mission
+
+复制mission
+
+改变mission层级
+
+
+
