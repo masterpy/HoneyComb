@@ -67,7 +67,7 @@ func QueryProjectByCode(projectCode string) (project Project) {
 	return project
 }
 
-func Projects(w http.ResponseWriter, r *http.Request) {
+func GetProjects(w http.ResponseWriter, r *http.Request) {
 	result, err := mydb.DBConn.Query("SELECT project_code, project_name, project_detail, person_in_charge, company_code, status FROM project")
 	defer result.Close()
 	if err != nil {

@@ -33,8 +33,12 @@ func Hub(w http.ResponseWriter, r *http.Request) {
 	switch cmd {
 	case "addProject":
 		AddProject(w, r)
-	case "projects":
-		Projects(w, r)
+	case "getProjects":
+		GetProjects(w, r)
+	case "addMission":
+		AddMission(w, r)
+	case "getMissions":
+		GetMissions(w, r)
 	default:
 		defaultCmd(w, r)
 	}

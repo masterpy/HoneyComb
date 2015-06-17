@@ -80,18 +80,18 @@ CREATE TABLE `mission` (
     `has_child` tinyint default 0 NOT NULL,                #是否包含子任务，0不是，1是
     `parent_code` char(32) NOT NULL,                       #父级mission_code
     `child_index` int default 0 NOT NULL,                  #作为子任务，其所在父下的顺序
-    `plan_begin_datetime` datetime NOT NULL,               #计划开始时间
-    `plan_end_datetime` datetime NOT NULL,                 #计划结束时间
-    `real_begin_datetime` datetime NOT NULL,               #实际开始时间
-    `real_end_datetime` datetime NOT NULL,                 #实际结束时间
-    `person_in_charge` char(32) NOT NULL,                  #存储`user_code`，任务的负责人
+    `plan_begin_datetime` datetime,                        #计划开始时间
+    `plan_end_datetime` datetime,                          #计划结束时间
+    `real_begin_datetime` datetime,                        #实际开始时间
+    `real_end_datetime` datetime,                          #实际结束时间
+    `assingto` char(32),                                   #存储`user_code`，任务的负责人
     `status` int default 0 NOT NULL,                       #0指定了人但未开始，1已经完成,2已经通过，3进行中，4未指定人
-    `picture` mediumtext NOT NULL,                         #照片的base64编码
+    `picture` mediumtext,                                  #照片的base64编码
     `insert_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `update_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`mission_id`),
     INDEX(`mission_code`),
-    INDEX(`person_in_charge`)
+    INDEX(`project_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

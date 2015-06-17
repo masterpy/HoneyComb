@@ -40,11 +40,32 @@ command : "command name"     api命令，根据command将分发到不同的处�
     "result": {}             //不同的接口不同的结果
 }
 
+获取所有项目
+{
+    "command" : "getProjects",
+}
+
+{
+    "error": {
+        "errorCode" : 0,
+        "errorMessage": ""
+    },
+    "command": "addProject",
+    "UserCode": string,      //发起该操作的user
+    "result": {}             //不同的接口不同的结果
+}
+
 添加mission
 {
     "command" : "addMission",
     "mission_name" : "",
-    "mission_detial" : ""
+    "mission_type" : "",
+    "mission_detial" : "",
+    "project_code" : "",
+    "has_child" : 0,
+    "parent_code" : "",
+    "child_index" : 0,
+    "status" : 0
 }
 
 {
@@ -56,6 +77,23 @@ command : "command name"     api命令，根据command将分发到不同的处�
     "UserCode": string,      //发起该操作的user
     "result": {}             //不同的接口不同的结果
 }
+
+获取所有的Mission
+{
+    "command" : "getMissions",
+    "project_code" : "",
+}
+
+{
+    "error": {
+        "errorCode" : 0,
+        "errorMessage": ""
+    },
+    "command": "addProject",
+    "UserCode": string,      //发起该操作的user
+    "result": {}             //不同的接口不同的结果
+}
+
 
 修改mission
 
