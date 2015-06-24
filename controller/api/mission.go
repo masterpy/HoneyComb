@@ -77,6 +77,27 @@ func AddMission(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, string(res))
 }
 
+// 现阶段直接移除，不做任何判断，以后要根据任务的状态以及分配情况选择直接删除还是标记删除
+func RemoveMission(w http.ResponseWriter, r *http.Request) {
+	mission_name := strings.Join(r.Form["mission_name"], "")
+	mission_code := strings.Join(r.Form["mission_code"], "")
+
+	fmt.Println("Remove mission", mission_name)
+
+	stmt, err := mydb.DBConn.Prepare("DELETE FROM mission WHERE mission_code=?")
+	if err != nil {
+		panic(err.Error())
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(mission_code)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	fmt.Fprintf(w, "[true,]")
+}
+
 func QueryMissionByCode(missionCode string) (mission Mission) {
 	stmt, err := mydb.DBConn.Prepare("SELECT mission_code, mission_name, mission_type, mission_detail, project_code, has_child, parent_code, child_index, status FROM mission WHERE mission_code=?")
 	defer stmt.Close()
