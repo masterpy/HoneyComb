@@ -16,12 +16,13 @@ func init() {
 	DBConn = ConnectToDB()
 }
 
+// TODO: 读入配置文件将来希望放到main中统一管理
 func ConnectToDB() *sql.DB {
 	if DBConn != nil {
 		return DBConn
 	}
 
-	conf := "./config/mysql.conf"
+	conf := "./Honeycomb.conf"
 	propertyMap := _t.ReadConfig(conf)
 
 	var userName, password, host, port, database string
