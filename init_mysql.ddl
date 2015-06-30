@@ -75,16 +75,17 @@ CREATE TABLE `mission` (
     `mission_code` char(32) NOT NULL unique,
     `mission_name` char(50) NOT NULL,                      #任务的名称
     `mission_type` char(32) NOT NULL,                      #存储mission_type_code，任务的类型
-    `mission_detail` varchar(200) NOT NULL,                #给任务一段更详细的文本说明
+    `priority` int default 5,                              #优先级
+    `degree_of_difficulty` int default 0,                  #难度系数
     `project_code` char(32) NOT NULL,                      #任务所属project
     `has_child` tinyint default 0 NOT NULL,                #是否包含子任务，0不是，1是
     `parent_code` char(32) NOT NULL,                       #父级mission_code
     `child_index` int default 0 NOT NULL,                  #作为子任务，其所在父下的顺序
-    `plan_begin_datetime` datetime,                        #计划开始时间
-    `plan_end_datetime` datetime,                          #计划结束时间
-    `real_begin_datetime` datetime,                        #实际开始时间
-    `real_end_datetime` datetime,                          #实际结束时间
-    `assingto` char(32),                                   #存储`user_code`，任务的负责人
+    `start_date` datetime default CURRENT_TIMESTAMP,              #计划开始时间
+    `due_date` datetime default CURRENT_TIMESTAMP,                #计划结束时间
+    `real_start_date` datetime default CURRENT_TIMESTAMP,         #实际开始时间
+    `real_due_date` datetime default CURRENT_TIMESTAMP,           #实际结束时间
+    `assign_to` char(32) default "" NOT NULL,              #存储`user_code`，任务的负责人
     `status` int default 0 NOT NULL,                       #0指定了人但未开始，1已经完成,2已经通过，3进行中，4未指定人
     `picture` mediumtext,                                  #照片的base64编码
     `insert_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

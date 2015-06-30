@@ -46,6 +46,9 @@ func Hub(w http.ResponseWriter, r *http.Request) {
 	case "getMissions":
 		GetMissions(w, r)
 
+	case "updateMission":
+		UpdateMission(w, r)
+
 	default:
 		defaultCmd(w, r)
 	}
