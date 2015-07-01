@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 	"strings"
 	//"time"
 )
@@ -82,24 +83,23 @@ func RemoveMission(w http.ResponseWriter, r *http.Request) {
 func UpdateMission(w http.ResponseWriter, r *http.Request) {
 	mission_code := strings.Join(r.Form["mission_code"], "")
 	mission_name := strings.Join(r.Form["mission_name"], "")
-	// mission_type := strings.Join(r.Form["mission_type"], "")
-	// mission_detail := ""
+	mission_type := strings.Join(r.Form["mission_type"], "")
 	assign_to := strings.Join(r.Form["assign_to"], "")
-	// has_child := 1
-	// parent_code := strings.Join(r.Form["parent_code"], "")
-	// child_index := 0
-	// status := 0
+	status_str := strings.Join(r.Form["status"], "")
+	status, _ := strconv.Atoi(status_str)
+	start_date := strings.Join(r.Form["start_date"], "")
+	due_date := strings.Join(r.Form["due_date"], "")
 
 	fmt.Println("Update mission", mission_name)
 
-	stmt, err := mydb.DBConn.Prepare("UPDATE mission SET assign_to = ? WHERE mission_code = ?")
+	stmt, err := mydb.DBConn.Prepare("UPDATE mission SET mission_name = ?, mission_type = ?, assign_to = ?, status = ?, start_date = ?, due_date = ? WHERE mission_code = ?")
 
 	if err != nil {
 		panic(err.Error())
 	}
 	defer stmt.Close()
 
-	_, err = stmt.Exec(assign_to, mission_code)
+	_, err = stmt.Exec(mission_name, mission_type, assign_to, status, start_date, due_date, mission_code)
 	if err != nil {
 		panic(err.Error())
 	}

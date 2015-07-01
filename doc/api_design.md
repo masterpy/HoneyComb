@@ -96,7 +96,27 @@ command : "command name"     api命令，根据command将分发到不同的处�
 
 
 修改mission
+{
+    "command" : "updateMission",
+    "mission_name" : "",
+    "mission_type" : "",
+    "mission_detial" : "",
+    "project_code" : "",
+    "has_child" : 0,
+    "parent_code" : "",
+    "child_index" : 0,
+    "status" : 0
+}
 
+{
+    "error": {
+        "errorCode" : 0,
+        "errorMessage": ""
+    },
+    "command": "addMission",
+    "UserCode": string,      //发起该操作的user
+    "result": {}             //不同的接口不同的结果
+}
 
 
 删除mission
