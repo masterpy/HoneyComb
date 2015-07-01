@@ -40,16 +40,19 @@ Table: project
 CREATE TABLE `project`(
     `project_id` int unsigned NOT NULL AUTO_INCREMENT,
     `project_code` char(32) NOT NULL,
-    `project_name` char(50) NOT NULL,                  #存储项目的名称
-    `project_detail` varchar(2000) NOT NULL,           #存储项目的详细说明
-    #`plan_begin_datetime` datetime  NOT NULL,          #存储项目计划开始的时间
-    #`plan_end_datetime` datetime NOT NULL,             #存储项目计划结束的时间
-    #`real_begin_datetime` datetime NOT NULL,           #存储项目实际开始的时间
-    #`real_end_datetime` datetime NOT NULL,             #存储项目实际结束的时间
-    `person_in_charge` char(32) NOT NULL,              #存储`user_code`，项目负责人的usercode
-    `company_code` char(32) NOT NULL ,                 #项目所属的公司
-    `status` int default 0 NOT NULL,                   #0未开始，1已经完成,2进行中
-    #`picture` mediumtext NOT NULL,                     #直接往mysql中写入照片的base64编码
+    `project_type` char(32) default "" NOT NULL,
+    `project_name` char(50) NOT NULL,                          #存储项目的名称
+    `project_detail` text default "" NOT NULL,                 #存储项目的详细说明
+    `manager` char(32) default "" NOT NULL,                    #存储`user_code`，项目负责人的usercode
+    `start_date` datetime  default CURRENT_TIMESTAMP,          #存储项目计划开始的时间
+    `due_date` datetime default CURRENT_TIMESTAMP,             #存储项目计划结束的时间
+    `real_start_date` datetime default CURRENT_TIMESTAMP,      #存储项目实际开始的时间
+    `real_due_date` datetime default CURRENT_TIMESTAMP,        #存储项目实际结束的时间
+    `status` int default 0 NOT NULL,                           #0未开始，1已经完成,2进行中
+    `win_path` varchar default "" NOT NULL,
+    `linux_path` varchar default "" NOT NULL,
+    `macos_path` varchar default "" NOT NULL,
+    `picture` mediumtext,                                      #直接往mysql中写入照片的base64编码
     `insert_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `update_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`project_id`),
@@ -86,7 +89,7 @@ CREATE TABLE `mission` (
     `real_start_date` datetime default CURRENT_TIMESTAMP,         #实际开始时间
     `real_due_date` datetime default CURRENT_TIMESTAMP,           #实际结束时间
     `assign_to` char(32) default "" NOT NULL,              #存储`user_code`，任务的负责人
-    `status` int default 0 NOT NULL,                       #0指定了人但未开始，1已经完成,2已经通过，3进行中，4未指定人
+    `status` int default 0 NOT NULL,                       #0指定了人但未开始
     `picture` mediumtext,                                  #照片的base64编码
     `insert_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `update_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

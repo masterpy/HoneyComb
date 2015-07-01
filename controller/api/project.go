@@ -42,6 +42,54 @@ func AddProject(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, string(res))
 }
 
+func UpdateProject(w http.ResponseWriter, r *http.Request) {
+	project_name := strings.Join(r.Form["project_name"], "")
+	project_detial := strings.Join(r.Form["project_detial"], "")
+	project_code := ut.GenerateCode(project_name)
+
+	fmt.Println("Add project", project_name)
+
+	stmt, err := mydb.DBConn.Prepare("INSERT INTO project(project_code, project_name, project_detail, person_in_charge, company_code, status) VALUES(?, ?, ?, ?, ?, ?)")
+	if err != nil {
+		panic(err.Error())
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(project_code, project_name, project_detial, "", "", 0)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	proj := QueryProjectByCode(project_code)
+	res, _ := json.Marshal(proj)
+
+	fmt.Fprintf(w, string(res))
+}
+
+func RemoveProject(w http.ResponseWriter, r *http.Request) {
+	project_name := strings.Join(r.Form["project_name"], "")
+	project_detial := strings.Join(r.Form["project_detial"], "")
+	project_code := ut.GenerateCode(project_name)
+
+	fmt.Println("Add project", project_name)
+
+	stmt, err := mydb.DBConn.Prepare("INSERT INTO project(project_code, project_name, project_detail, person_in_charge, company_code, status) VALUES(?, ?, ?, ?, ?, ?)")
+	if err != nil {
+		panic(err.Error())
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(project_code, project_name, project_detial, "", "", 0)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	proj := QueryProjectByCode(project_code)
+	res, _ := json.Marshal(proj)
+
+	fmt.Fprintf(w, string(res))
+}
+
 func QueryProjectByCode(projectCode string) (project Project) {
 	stmt, err := mydb.DBConn.Prepare("SELECT project_code, project_name, project_detail, person_in_charge, company_code, status FROM project WHERE project_code=?")
 	defer stmt.Close()
