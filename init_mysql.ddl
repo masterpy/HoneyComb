@@ -40,18 +40,18 @@ Table: project
 CREATE TABLE `project`(
     `project_id` int unsigned NOT NULL AUTO_INCREMENT,
     `project_code` char(32) NOT NULL,
-    `project_type` char(32) default "" NOT NULL,
+    `project_type` char(32) default '' NOT NULL,
     `project_name` char(50) NOT NULL,                          #存储项目的名称
-    `project_detail` text default "" NOT NULL,                 #存储项目的详细说明
-    `manager` char(32) default "" NOT NULL,                    #存储`user_code`，项目负责人的usercode
+    `project_detail` text NOT NULL,                 #存储项目的详细说明
+    `manager` char(32) default '' NOT NULL,                    #存储`user_code`，项目负责人的usercode
     `start_date` datetime  default CURRENT_TIMESTAMP,          #存储项目计划开始的时间
     `due_date` datetime default CURRENT_TIMESTAMP,             #存储项目计划结束的时间
     `real_start_date` datetime default CURRENT_TIMESTAMP,      #存储项目实际开始的时间
     `real_due_date` datetime default CURRENT_TIMESTAMP,        #存储项目实际结束的时间
     `status` int default 0 NOT NULL,                           #0未开始，1已经完成,2进行中
-    `win_path` varchar default "" NOT NULL,
-    `linux_path` varchar default "" NOT NULL,
-    `macos_path` varchar default "" NOT NULL,
+    `win_path` varchar(255) default '' NOT NULL,
+    `linux_path` varchar(255) default '' NOT NULL,
+    `macos_path` varchar(255) default '' NOT NULL,
     `picture` mediumtext,                                      #直接往mysql中写入照片的base64编码
     `insert_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `update_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

@@ -34,6 +34,9 @@ func Hub(w http.ResponseWriter, r *http.Request) {
 	case "addProject":
 		AddProject(w, r)
 
+	case "updateProject":
+		UpdateProject(w, r)
+
 	case "getProjects":
 		GetProjects(w, r)
 
