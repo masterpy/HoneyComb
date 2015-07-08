@@ -99,6 +99,38 @@ CREATE TABLE `mission` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+# Table: mission_require
+# 存储任务需求相关信息
+CREATE TABLE `mission_require` (
+    `require_id` int unsigned NOT NULL AUTO_INCREMENT,
+    `require_code` char(32) NOT NULL unique,
+    `mission_code` char(32) NOT NULL,
+    `require_type` int default 0 NOT NULL,                             #需求的类型，0文本 1图片
+    `content` text NOT NULL,
+    `insert_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `update_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`require_id`),
+    INDEX(`require_code`),
+    INDEX(`mission_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+# Table: mission_target
+# 存储任务目标文件相关信息
+CREATE TABLE `mission_target` (
+    `target_id` int unsigned NOT NULL AUTO_INCREMENT,
+    `target_code` char(32) NOT NULL unique,
+    `mission_code` char(32) NOT NULL,
+    `target_name` char(32) NOT NULL,
+    `target_type` int default 0 NOT NULL,                             #需求的类型，0文本 1图片
+    `comment` text NOT NULL,
+    `insert_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `update_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`target_id`),
+    INDEX(`target_code`),
+    INDEX(`mission_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 

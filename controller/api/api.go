@@ -52,6 +52,24 @@ func Hub(w http.ResponseWriter, r *http.Request) {
 	case "updateMission":
 		UpdateMission(w, r)
 
+	case "addMissionRequire":
+		AddRequire(w, r)
+
+	case "removeMissionRequire":
+		RemoveRequire(w, r)
+
+	case "getMissionRequires":
+		GetMissionRequire(w, r)
+
+	case "addMissionTarget":
+		AddTarget(w, r)
+
+	case "removeMissionTarget":
+		RemoveTarget(w, r)
+
+	case "getMissionTargets":
+		GetMissionTarget(w, r)
+
 	default:
 		defaultCmd(w, r)
 	}
