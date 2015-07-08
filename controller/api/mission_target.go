@@ -40,7 +40,7 @@ func AddTarget(w http.ResponseWriter, r *http.Request) {
 		panic(err.Error())
 	}
 
-	target := QueryRequireByCode(target_code)
+	target := QueryTargetByCode(target_code)
 	res, _ := json.Marshal(target)
 
 	fmt.Fprintf(w, string(res))
@@ -114,15 +114,15 @@ func QueryTargetByCode(target_code string) (target MissionTarget) {
 }
 
 func GetMissionTarget(w http.ResponseWriter, r *http.Request) {
-	target_code := strings.Join(r.Form["target_code"], "")
+	mission_code := strings.Join(r.Form["mission_code"], "")
 
-	stmt, err := mydb.DBConn.Prepare("SELECT target_code, mission_code, target_name, target_type, comment FROM mission_target WHERE target_code=?")
+	stmt, err := mydb.DBConn.Prepare("SELECT target_code, mission_code, target_name, target_type, comment FROM mission_target WHERE mission_code=?")
 	defer stmt.Close()
 	if err != nil {
 		panic(err.Error())
 	}
 
-	result, err := stmt.Query(target_code)
+	result, err := stmt.Query(mission_code)
 	defer result.Close()
 	if err != nil {
 		panic(err.Error())
