@@ -1,12 +1,10 @@
 
 # MySQL DB Honeycomb
-
 CREATE DATABASE IF NOT EXISTS Honeycomb DEFAULT CHARSET utf8;
 
 
 # Table: user
 # 存储用户名、密码、组别、APIKEY等信息，后续改为用email登录
-
 CREATE TABLE `user` (
     `user_id` int unsigned NOT NULL AUTO_INCREMENT,
     `user_code` char(32) NOT NULL unique,
@@ -36,7 +34,6 @@ CREATE TABLE `user` (
 
 # Table: project
 # 存储项目的相关信息
-
 CREATE TABLE `project`(
     `project_id` int unsigned NOT NULL AUTO_INCREMENT,
     `project_code` char(32) NOT NULL,
@@ -61,7 +58,6 @@ CREATE TABLE `project`(
 
 
 # Table: Mission Type
-
 CREATE TABLE `missiontype` (
     `mission_type_id` int unsigned NOT NULL AUTO_INCREMENT,
     `mission_type_code` char(32) NOT NULL unique,
@@ -72,7 +68,6 @@ CREATE TABLE `missiontype` (
 
 # Table: mission
 # 存储任务相关信息
-
 CREATE TABLE `mission` (
     `mission_id` int unsigned NOT NULL AUTO_INCREMENT,
     `mission_code` char(32) NOT NULL unique,
@@ -128,6 +123,22 @@ CREATE TABLE `mission_target` (
     `update_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`target_id`),
     INDEX(`target_code`),
+    INDEX(`mission_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+# Table: mission_metadata
+# 存储任务目标文件相关信息
+CREATE TABLE `mission_metadata` (
+    `metadata_id` int unsigned NOT NULL AUTO_INCREMENT,
+    `metadata_code` char(32) NOT NULL unique,
+    `mission_code` char(32) NOT NULL,
+    `metadata_name` char(32) NOT NULL,
+    `metadata_value` varchar(256) NOT NULL,
+    `insert_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `update_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`metadata_id`),
+    INDEX(`metadata_code`),
     INDEX(`mission_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

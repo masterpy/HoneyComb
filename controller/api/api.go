@@ -70,6 +70,15 @@ func Hub(w http.ResponseWriter, r *http.Request) {
 	case "getMissionTargets":
 		GetMissionTarget(w, r)
 
+	case "addMetadata":
+		AddMetadata(w, r)
+
+	case "getMissionMetadata":
+		GetMissionMetadata(w, r)
+
+	case "removeMissionMetadata":
+		RemoveMetadata(w, r)
+
 	default:
 		defaultCmd(w, r)
 	}
