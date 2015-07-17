@@ -79,6 +79,15 @@ func Hub(w http.ResponseWriter, r *http.Request) {
 	case "removeMissionMetadata":
 		RemoveMetadata(w, r)
 
+	case "addNote":
+		AddNote(w, r)
+
+	case "getMissionNote":
+		GetMissionNote(w, r)
+
+	case "removeMissionNote":
+		RemoveNote(w, r)
+
 	default:
 		defaultCmd(w, r)
 	}

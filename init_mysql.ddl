@@ -143,5 +143,20 @@ CREATE TABLE `mission_metadata` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+# Table: mission_note
+# 存储任务目标文件相关信息
+CREATE TABLE `mission_note` (
+    `note_id` int unsigned NOT NULL AUTO_INCREMENT,
+    `note_code` char(32) NOT NULL unique,
+    `mission_code` char(32) NOT NULL,
+    `user_code` char(32) default "" NOT NULL,
+    `note_type` int default 0 NOT NULL,
+    `content` text NOT NULL,
+    `insert_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `update_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`note_id`),
+    INDEX(`note_code`),
+    INDEX(`mission_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
