@@ -1,7 +1,8 @@
-
 # MySQL DB Honeycomb
 CREATE DATABASE IF NOT EXISTS Honeycomb DEFAULT CHARSET utf8;
 
+# Change Database
+use Honeycomb;
 
 # Table: user
 # 存储用户名、密码、组别、APIKEY等信息，后续改为用email登录
@@ -28,8 +29,6 @@ CREATE TABLE `user` (
 
 
 # Table: phone
-
-
 
 
 # Table: project
