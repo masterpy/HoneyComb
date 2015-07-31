@@ -9,19 +9,14 @@ use Honeycomb;
 CREATE TABLE `user` (
     `user_id` int unsigned NOT NULL AUTO_INCREMENT,
     `user_code` char(32) NOT NULL unique,
-    `company_code` char(32) NOT NULL,
-    `email` char(30) NOT NULL,
     `password` char(32) NOT NULL,
-    `group` varchar(20) NOT NULL,
+    `email` char(30) NOT NULL,
     `display_name` char(20) NOT NULL,
-    `position` varchar(50) NOT NULL,
     `picture` mediumtext NOT NULL,
-    `phone` char(20) NOT NULL,
     `insert_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `update_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`user_id`),
-    INDEX(`email`),
-    INDEX(`group`)
+    INDEX(`user_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -61,7 +56,7 @@ CREATE TABLE `missiontype` (
     `mission_type_id` int unsigned NOT NULL AUTO_INCREMENT,
     `mission_type_code` char(32) NOT NULL unique,
     `mission_type_name` char(50) NOT NULL,
-    `mission_type_detail` varchar(200) NOT NULL,
+    `mission_type_detail` varchar(200) NOT NULL
 )
 
 
