@@ -5,18 +5,18 @@ CREATE DATABASE IF NOT EXISTS Honeycomb DEFAULT CHARSET utf8;
 use Honeycomb;
 
 # Table: user
-# 存储用户名、密码、组别、APIKEY等信息，后续改为用email登录
-CREATE TABLE `user` (
-    `user_id` int unsigned NOT NULL AUTO_INCREMENT,
-    `user_code` char(32) NOT NULL unique,
-    `password` char(32) NOT NULL,
-    `email` char(30) NOT NULL,
-    `display_name` char(20) NOT NULL,
-    `picture` mediumtext NOT NULL,
-    `insert_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `update_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (`user_id`),
-    INDEX(`user_code`)
+# 存储用户名、密码、组别、API-KEY等信息，后续改为用email登录
+CREATE TABLE user (
+    user_id int unsigned NOT NULL AUTO_INCREMENT,
+    user_code char(32) NOT NULL unique,
+    password char(32) NOT NULL,
+    email char(30) NOT NULL,
+    display_name char(20) NOT NULL,
+    picture mediumtext NOT NULL,
+    insert_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (user_id),
+    INDEX(user_code)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -52,12 +52,12 @@ CREATE TABLE `project`(
 
 
 # Table: Mission Type
-CREATE TABLE `missiontype` (
+CREATE TABLE `mission_type` (
     `mission_type_id` int unsigned NOT NULL AUTO_INCREMENT,
     `mission_type_code` char(32) NOT NULL unique,
     `mission_type_name` char(50) NOT NULL,
     `mission_type_detail` varchar(200) NOT NULL
-)
+);
 
 
 # Table: mission
@@ -77,7 +77,7 @@ CREATE TABLE `mission` (
     `due_date` datetime default CURRENT_TIMESTAMP,                #计划结束时间
     `real_start_date` datetime default CURRENT_TIMESTAMP,         #实际开始时间
     `real_due_date` datetime default CURRENT_TIMESTAMP,           #实际结束时间
-    `assign_to` char(32) default "" NOT NULL,                     #存储`user_code`，任务的负责人
+    `assign_to` char(32) default '' NOT NULL,                     #存储`user_code`，任务的负责人
     `status` int default 0 NOT NULL,                              #0指定了人但未开始
     `picture` mediumtext,                                         #照片的base64编码
     `insert_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -143,7 +143,7 @@ CREATE TABLE `mission_note` (
     `note_id` int unsigned NOT NULL AUTO_INCREMENT,
     `note_code` char(32) NOT NULL unique,
     `mission_code` char(32) NOT NULL,
-    `user_code` char(32) default "" NOT NULL,
+    `user_code` char(32) default '' NOT NULL,
     `note_type` int default 0 NOT NULL,
     `content` text NOT NULL,
     `insert_datetime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

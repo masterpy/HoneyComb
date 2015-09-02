@@ -27,7 +27,7 @@ command : "command name"     api命令，根据command将分发到不同的处�
 {
     "command" : "addProject",
     "project_name" : "",
-    "project_detial" : ""
+    "project_detail" : ""
 }
 
 {
